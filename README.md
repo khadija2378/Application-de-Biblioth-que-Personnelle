@@ -121,7 +121,7 @@ Beaucoup de gens ont des livres chez eux mais ne savent pas :
   <kbd>📄 Diagramme de Cas d'Utilisation UML</kbd>
 </a>
 
-- <a href="https://www.figma.com/design/AutcLkCvlY2cVqxRCaDxOr/MyTiq?node-id=0-1&t=jFHf1QloX3EsyCT8-1](https://www.figma.com/design/8wP6fMWDXSnxMgBr3xKNl3/Untitled?node-id=0-1&t=SPeih256rrpgDSZ1-1)" target="_blank" style="text-decoration:none;">
+- <a href="https://www.figma.com/design/8wP6fMWDXSnxMgBr3xKNl3/Untitled?node-id=0-1&t=SPeih256rrpgDSZ1-1" target="_blank" style="text-decoration:none;">
   <kbd>🎨 Maquettage Figma</kbd>
 </a>
 
