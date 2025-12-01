@@ -107,4 +107,21 @@ Beaucoup de gens ont des livres chez eux mais ne savent pas :
 - Bugs bloquants : 0  
 
 ---
+### 🔗 Liens utiles
+
+- <a href="https://khadija-araja.atlassian.net/jira/software/projects/KAN/list?jql=project+%3D+%22KAN%22+ORDER+BY+created+DESC&atlOrigin=eyJpIjoiNTViNzY1MjYzYWIwNGUxNzljMmY0MGNlOTY4NWExZmUiLCJwIjoiaiJ9" target="_blank" style="text-decoration:none;">
+  <kbd>📋 Voir le Planning Jira</kbd>
+</a>
+
+- <a href="https://lucid.app/lucidchart/f287cb01-9675-4eec-9020-9defbdd61f54/edit?viewport_loc=-1271%2C-644%2C1908%2C868%2C0_0&invitationId=inv_1a93137e-51ac-490d-86b3-4322ec8408f9" target="_blank" style="text-decoration:none;">
+  <kbd>📐 Diagramme de Classes UML</kbd>
+</a>
+
+- <a href="https://lucid.app/lucidchart/f287cb01-9675-4eec-9020-9defbdd61f54/edit?viewport_loc=-2086%2C-171%2C2812%2C1280%2C.w1-nsZy5vw1&invitationId=inv_1a93137e-51ac-490d-86b3-4322ec8408f9" target="_blank" style="text-decoration:none;">
+  <kbd>📄 Diagramme de Cas d'Utilisation UML</kbd>
+</a>
+
+- <a href="https://www.figma.com/design/AutcLkCvlY2cVqxRCaDxOr/MyTiq?node-id=0-1&t=jFHf1QloX3EsyCT8-1](https://www.figma.com/design/8wP6fMWDXSnxMgBr3xKNl3/Untitled?node-id=0-1&t=SPeih256rrpgDSZ1-1)" target="_blank" style="text-decoration:none;">
+  <kbd>🎨 Maquettage Figma</kbd>
+</a>
 
