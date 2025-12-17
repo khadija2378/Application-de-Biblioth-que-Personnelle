@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('borrower_name');
             $table->date('loan_date');
             $table->date('return_date_expected');
-            $table->enum('status', ['borrowed', 'returned', 'late', 'cancelled'])->default('borrowed');
+            $table->enum('status', ['pending', 'returned', 'late'])->default('pending');
             $table->timestamps();
         });
     }

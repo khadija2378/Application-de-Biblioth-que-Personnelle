@@ -13,52 +13,40 @@ class LoanController extends Controller
      */
     public function index()
     {
-        //
+        $loans  = Loan::with('user')->get();
+        return response()->json([
+            'message' => 'All Books loans',
+            'books' => $loans 
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(StoreLoanRequest $request)
     {
-        //
+        $loaData = $request->validated();
+        
+        $loaData['book_id'] = $request->book_id;
+
+        $book = Loan::create($loaData);
+
+        return response()->json([
+            'message' => 'Book created successfully',
+            'book' => $book
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
+    
     public function show(Loan $loan)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Loan $loan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
+   
     public function update(UpdateLoanRequest $request, Loan $loan)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Loan $loan)
     {
         //

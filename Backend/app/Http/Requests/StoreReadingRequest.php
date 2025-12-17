@@ -11,7 +11,7 @@ class StoreReadingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreReadingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+        'user_id'     => 'exists:users,id',
+        'book_id'     => 'exists:books,id',
+        'comment'     => 'required|string|max:50',
+        'status' => 'string|in:unread,reading,finished',
         ];
     }
 }

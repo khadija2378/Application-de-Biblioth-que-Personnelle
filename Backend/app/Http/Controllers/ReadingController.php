@@ -8,59 +8,30 @@ use App\Http\Requests\UpdateReadingRequest;
 
 class ReadingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        //
+        $readings  = Reading::with('book', 'user')->get();
+        return response()->json([
+            'message' => 'All Reding books',
+            'books' => $readings 
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(StoreReadingRequest $request)
     {
-        //
+        $readData = $request->validated();
+        $readData['user_id'] = Auth::user()->id;
+        $readData['book_id'] = $request->book_id;
+
+        $book = Reading::create($readData);
+
+        return response()->json([
+            'message' => 'Book created successfully',
+            'book' => $book
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Reading $reading)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Reading $reading)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateReadingRequest $request, Reading $reading)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Reading $reading)
-    {
-        //
-    }
+    
 }
