@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Loan;
 use App\Http\Requests\StoreLoanRequest;
 use App\Http\Requests\UpdateLoanRequest;
+use Illuminate\Support\Facades\Auth;
 
 class LoanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        $loans  = Loan::with('user')->get();
+        $user=Auth::id();
+        $loans  = Loan::where('user_id', $user)->with('book')->get();
         return response()->json([
             'message' => 'All Books loans',
             'books' => $loans 
@@ -23,32 +23,45 @@ class LoanController extends Controller
     
     public function store(StoreLoanRequest $request)
     {
-        $loaData = $request->validated();
-        
-        $loaData['book_id'] = $request->book_id;
-
-        $book = Loan::create($loaData);
+        $loaData = $request->validated();  
+        $loaData['user_id'] = Auth::id();
+        $loaData['loan_date'] = now();
+        $loan = Loan::create($loaData);
 
         return response()->json([
-            'message' => 'Book created successfully',
-            'book' => $book
+            'message' => 'Loan created successfully',
+            'loan' => $loan
         ]);
     }
 
     
-    public function show(Loan $loan)
+    public function returnBook(Loan $loan)
     {
-        //
+         $this->authorize('update', $loan);
+        $loan->update(['returned' => true]);
+        return response()->json(['message' => 'Book rendu']);
     }
+
+    public function update(UpdateLoanRequest $request, Loan $loan)
+{
+    $this->authorize('update', $loan);
+
+       $loans = $request->validated();
+        
+        $loan->update($loans);
+
+
+return response()->json($loan);
+}
+
+
+public function destroy(Loan $loan)
+{
+    $this->authorize('delete', $loan);
+      $loan->delete();
+
+return response()->json(['message' => 'Loan deleted']);
+}
 
    
-    public function update(UpdateLoanRequest $request, Loan $loan)
-    {
-        //
-    }
-
-    public function destroy(Loan $loan)
-    {
-        //
-    }
 }

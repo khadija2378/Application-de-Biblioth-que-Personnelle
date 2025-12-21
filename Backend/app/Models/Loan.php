@@ -13,7 +13,7 @@ class Loan extends Model
         'borrower_name',
         'loan_date',
         'return_date_expected',
-        'status',
+        'returned',
     ];
 
      public function book(){

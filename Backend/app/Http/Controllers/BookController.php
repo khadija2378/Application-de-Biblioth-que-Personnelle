@@ -7,12 +7,14 @@ use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use Illuminate\Support\Facades\Auth;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Support\Facades\Request;
 
 class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::with('user')->get();
+        $user=Auth::user()->id;
+        $books = Book::where('user_id', $user)->get();
         return response()->json([
             'message' => 'All Books',
             'books' => $books
@@ -22,7 +24,7 @@ class BookController extends Controller
     public function store(StoreBookRequest $request)
     {
         $booksData = $request->validated();
-        $booksData['user_id'] = Auth::user()->id;
+        $booksData['user_id'] = Auth::id();
 
         if ($request->hasFile('image')) {
             $result = Cloudinary::upload($request->file('image')->getRealPath());
@@ -39,6 +41,7 @@ class BookController extends Controller
 
     public function show(Book $book)
     {
+        $this->authorize('view', $book);
         return response()->json([
             'message' => 'Book details',
             'book' => $book
@@ -47,6 +50,7 @@ class BookController extends Controller
 
     public function update(UpdateBookRequest $request, Book $book)
     {
+        $this->authorize('update', $book);
         $booksData = $request->validated();
 
         if ($request->hasFile('image')) {
@@ -69,6 +73,7 @@ class BookController extends Controller
 
     public function destroy(Book $book)
     {
+        $this->authorize('delete', $book);
         if ($book->image) {
             $publicId = pathinfo(parse_url($book->image, PHP_URL_PATH), PATHINFO_FILENAME);
             Cloudinary::destroy($publicId);
@@ -77,5 +82,19 @@ class BookController extends Controller
         $book->delete();
 
         return response()->json(['message' => 'Book deleted successfully']);
+    }
+
+    public function search(Request $request){
+       if($request->ajax()){
+        $request->validate([
+        'search' => 'required|string'
+    ]);
+        $data=Book::where('user_id', Auth::id())->where('title', 'like', '%'.$request->search.'%')
+        ->orWhere('author', 'like', '%'.$request->search.'%')->get();
+         return response()->json([
+            'message' => 'this book',
+            'book' => $data
+        ]);
+       }
     }
 }

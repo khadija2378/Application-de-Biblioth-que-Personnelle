@@ -3,6 +3,13 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+
+use App\Models\Book;
+use App\Models\Loan;
+use App\Models\Reading;
+use App\Policies\BookPolicy;
+use App\Policies\LoanPolicy;
+use App\Policies\ReadingPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -14,6 +21,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+         Reading::class => ReadingPolicy::class,
+          Book::class => BookPolicy::class,
+           Loan::class => LoanPolicy::class,
     ];
 
     /**

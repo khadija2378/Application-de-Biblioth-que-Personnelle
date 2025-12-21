@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateBookRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,10 +22,10 @@ class UpdateBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'user_id'     => 'exists:users,id',
-        'title'     => 'sometimes|string|max:50',
-        'author' => 'sometimes|string|max:255',
-        'image' => 'sometimes|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'name'=>'required|min:3',
+            'email'=>'required|email|unique:users,email',
+            'password'=>'required|min:4|confirmed',
+            'role'=>'in:admin,user,animateur',
         ];
     }
 }

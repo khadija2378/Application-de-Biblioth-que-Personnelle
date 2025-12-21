@@ -21,7 +21,7 @@ class BookPolicy
      */
     public function view(User $user, Book $book): bool
     {
-        //
+        return $user->id === $book->user_id;
     }
 
     /**
@@ -37,7 +37,7 @@ class BookPolicy
      */
     public function update(User $user, Book $book): bool
     {
-        //
+        return $user->id === $book->user_id;
     }
 
     /**
@@ -45,7 +45,7 @@ class BookPolicy
      */
     public function delete(User $user, Book $book): bool
     {
-        //
+        return $user->id === $book->user_id;
     }
 
     /**

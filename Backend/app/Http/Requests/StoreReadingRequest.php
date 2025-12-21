@@ -25,7 +25,7 @@ class StoreReadingRequest extends FormRequest
         'user_id'     => 'exists:users,id',
         'book_id'     => 'exists:books,id',
         'comment'     => 'required|string|max:50',
-        'status' => 'string|in:unread,reading,finished',
+        'status'      => 'string|in:unread,reading,finished',
         ];
     }
 }

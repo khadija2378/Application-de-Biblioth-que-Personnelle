@@ -37,7 +37,7 @@ class ReadingPolicy
      */
     public function update(User $user, Reading $reading): bool
     {
-        //
+         return $user->id === $reading->user_id;
     }
 
     /**
@@ -45,7 +45,7 @@ class ReadingPolicy
      */
     public function delete(User $user, Reading $reading): bool
     {
-        //
+        return $user->id === $reading->user_id;
     }
 
     /**
