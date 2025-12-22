@@ -20,9 +20,10 @@ class ReadingFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'book_id' => Book::factory(), 
+            'book_id' => Book::factory(),
+            'status' => fake()->randomElement(['reading', 'finished']),
             'comment' => fake()->paragraph(),
-            'status' => fake()->randomElement(['unread', 'reading', 'finished']),
+
         ];
     }
 }

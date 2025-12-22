@@ -44,6 +44,7 @@ Route::get('/reading/index', [ReadingController::class, 'indexFinished']);
 //loan
 
 Route::resource('loan', LoanController::class);
+Route::post('/books/{book}/loans', [LoanController::class, 'store']);
 Route::get('/loan/returnBook', [LoanController::class, 'returnBook']);
 
 });

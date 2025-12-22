@@ -12,7 +12,7 @@ class Loan extends Model
         'book_id',
         'borrower_name',
         'loan_date',
-        'return_date_expected',
+        'return_date',
         'returned',
     ];
 

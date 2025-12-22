@@ -5,26 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\Loan;
 use App\Http\Requests\StoreLoanRequest;
 use App\Http\Requests\UpdateLoanRequest;
+use App\Models\Book;
 use Illuminate\Support\Facades\Auth;
 
 class LoanController extends Controller
 {
-    
+
     public function index()
     {
         $user=Auth::id();
         $loans  = Loan::where('user_id', $user)->with('book')->get();
         return response()->json([
             'message' => 'All Books loans',
-            'books' => $loans 
+            'books' => $loans
         ]);
     }
 
-    
-    public function store(StoreLoanRequest $request)
+
+    public function store(StoreLoanRequest $request, Book $book)
     {
-        $loaData = $request->validated();  
+        $loaData = $request->validated();
         $loaData['user_id'] = Auth::id();
+        $loaData['book_id'] = $book->id;
         $loaData['loan_date'] = now();
         $loan = Loan::create($loaData);
 
@@ -34,7 +36,7 @@ class LoanController extends Controller
         ]);
     }
 
-    
+
     public function returnBook(Loan $loan)
     {
          $this->authorize('update', $loan);
@@ -47,7 +49,7 @@ class LoanController extends Controller
     $this->authorize('update', $loan);
 
        $loans = $request->validated();
-        
+
         $loan->update($loans);
 
 
@@ -63,5 +65,5 @@ public function destroy(Loan $loan)
 return response()->json(['message' => 'Loan deleted']);
 }
 
-   
+
 }
