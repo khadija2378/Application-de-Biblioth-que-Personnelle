@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Login from "../compenents/Login";
 import Register from "../compenents/Register";
+import { LogIn, UserRoundPlus } from "lucide-react";
 
 export default function AuthCard() {
   const [flip, setFlip] = useState(false);
@@ -23,6 +24,7 @@ export default function AuthCard() {
         >
           {/* FRONT */}
           <div className="absolute inset-0 bg-gradient-to-br from-[#800020] to-[#4B0016] text-white flex flex-col justify-center items-center space-y-9 backface-hidden">
+            <LogIn size={60}/>
             <h2 className="text-3xl font-bold ">Welcome Back</h2>
             <p className="font-thin">Access your personal library and manage your books easily</p>
             <button
@@ -35,6 +37,7 @@ export default function AuthCard() {
 
           {/* BACK */}
           <div className="absolute inset-0 bg-gradient-to-br from-[#800020] to-[#4B0016] text-white flex flex-col justify-center items-center space-y-9 backface-hidden rotate-y-180">
+            <UserRoundPlus size={60}/>
             <h2 className="text-3xl font-bold ">Hello, Friend</h2>
             <p className="font-thin text-center mx-7">Create an account to start building and organizing your personal book collection</p>
             <button
