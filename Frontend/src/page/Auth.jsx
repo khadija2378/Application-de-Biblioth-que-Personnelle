@@ -10,19 +10,16 @@ export default function AuthCard() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="relative w-full max-w-4xl h-[480px] bg-white rounded-xl shadow-xl overflow-hidden perspective-1200">
 
-        {/* FORMS (FIXES) */}
         <div className="absolute inset-0 grid grid-cols-2">
          <Login/>
          <Register/>
           
         </div>
 
-        {/* FLIP OVERLAY */}
         <div
           className={`absolute top-0 left-0 h-full w-1/2 transition-transform duration-700 preserve-3d
           ${flip ? "translate-x-full rotate-y-180" : ""}`}
         >
-          {/* FRONT */}
           <div className="absolute inset-0 bg-gradient-to-br from-[#800020] to-[#4B0016] text-white flex flex-col justify-center items-center space-y-9 backface-hidden">
             <LogIn size={60}/>
             <h2 className="text-3xl font-bold ">Welcome Back</h2>
@@ -35,7 +32,6 @@ export default function AuthCard() {
             </button>
           </div>
 
-          {/* BACK */}
           <div className="absolute inset-0 bg-gradient-to-br from-[#800020] to-[#4B0016] text-white flex flex-col justify-center items-center space-y-9 backface-hidden rotate-y-180">
             <UserRoundPlus size={60}/>
             <h2 className="text-3xl font-bold ">Hello, Friend</h2>

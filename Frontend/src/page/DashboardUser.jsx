@@ -7,7 +7,7 @@ import MainLoan from '../compenents/MainLoan';
 import MainStatistic from '../compenents/MainStatistic';
 import Header from '../compenents/Header';
 
-const Dashboard = () => {
+const DashboardUser = () => {
   const [activeSection, setActiveSection] = useState("dashboard");
 
      const renderContent = () => {
@@ -42,4 +42,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardUser;

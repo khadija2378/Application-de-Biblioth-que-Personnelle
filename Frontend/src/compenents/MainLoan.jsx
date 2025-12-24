@@ -35,9 +35,16 @@ function MainLoan() {
               </div>
     
               <div className="bg-white rounded-xl p-8 border border-gray-100 min-h-[400px]">
-                <h3 className="text-lg font-bold text-gray-800 mb-6">Latest addition</h3>
-                <div className="border-2 border-dashed border-gray-100 rounded-2xl h-64 flex items-center justify-center">
-                    <p className="text-gray-400 italic">No books added recently</p>
+                <div className="flex gap-5">
+                <button className="bg-gray-200 rounded-full text-gray-800 px-6 py-2.5 font-medium  cursor-pointer hover:text-[#800020]">
+                    All 
+                </button>
+                <button className="bg-gray-200 rounded-full text-gray-800 px-6 py-2.5 font-medium  cursor-pointer hover:text-[#800020]">
+                    returned
+                </button>
+                <button className="bg-gray-200 rounded-full text-gray-800 px-6 py-2.5 font-medium  cursor-pointer hover:text-[#800020]">
+                    Late
+                </button>
                 </div>
               </div>
             </div>
