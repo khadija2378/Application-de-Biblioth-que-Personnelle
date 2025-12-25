@@ -1,9 +1,59 @@
-import React from 'react'
+import axios from 'axios';
+import React, { createContext, useState } from 'react'
+export const AuthContext=createContext();
 
-function AuthContext() {
+export const AuthProvider = ({ children }) => {
+    const [user,setUser]=useState(null);
+    const token = localStorage.getItem("token");
+        
+    const register = async(data) =>{
+
+        try{
+      const res=await axios.post('http://127.0.0.1:8000/api/register',data);
+
+       return res.data.user;
+    
+        }catch (err) {
+      console.error("Erreur chargement user:", err);
+
+        }   
+    }
+
+
+    const login = async(data) =>{
+        try{
+      const res=await axios.post('http://127.0.0.1:8000/api/login',data);
+      localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+       setUser(res.data.user);
+       return {
+      token: res.data.token,
+      user: res.data.user,
+    };
+        }catch (err) {
+      console.error("Erreur chargement user:", err);
+        }
+    }
+
+    const logout = async() =>{
+        try{ 
+        await axios.post('http://127.0.0.1:8000/api/logout',{},
+       { headers: { Authorization: `Bearer ${token}` } });
+         localStorage.removeItem('user');
+          localStorage.removeItem('token');
+         setUser(null);   
+        } catch (error) {
+            console.error('Logout failed:', error);
+        }
+         
+    }
+
   return (
-    <div>AuthContext</div>
+     <AuthContext.Provider
+      value={{ register , login , user , logout }}
+    >
+      {children}
+    </AuthContext.Provider>
   )
 }
 
-export default AuthContext

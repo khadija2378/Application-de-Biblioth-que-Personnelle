@@ -1,5 +1,5 @@
 
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import './App.css'
 import Footer from './compenents/Footer'
 import Navbar from './compenents/NavBar'
@@ -8,19 +8,22 @@ import Home from './page/Home'
 import DashboardUser from './page/DashboardUser'
 
 function App() {
-
+    const location = useLocation();
+    const hideLayout = location.pathname === '/dashboard';
   return (
     <>
-       {/* <Navbar/>
+       {!hideLayout && <Navbar />}
      <Routes>
       <Route path='/register' element={<Auth/>}/>
       <Route path='/login' element={<Auth/>}/>
       <Route path='/' element={ <Home/> }/>
+      <Route path='/dashboard' element={ <DashboardUser/> }/>
       
      </Routes>
-       <Footer/>   */}
+      {!hideLayout && <Footer />}
+          
 
-         <DashboardUser/>   
+        
       
     </>
   )

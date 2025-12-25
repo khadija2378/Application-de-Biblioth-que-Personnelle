@@ -1,7 +1,17 @@
 import { BarChart, BarChart3, BookOpen, LayoutDashboard, LogOut, RefreshCcw, User } from 'lucide-react'
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../Context/AuthContext'
+import { useNavigate } from 'react-router-dom';
 
 function SideBar({ activeSection, setActiveSection }) {
+       const {logout}=useContext(AuthContext);
+       const navigate=useNavigate();
+
+       const handelLogout = async() =>{
+      await logout();
+       navigate('/login');
+    }
+
   return (
      <div className="w-64 bg-white flex flex-col border-r border-gray-100">
         <div className="p-6 flex items-center gap-3">
@@ -63,7 +73,7 @@ function SideBar({ activeSection, setActiveSection }) {
         </nav>
 
         <div className="p-4 border-t border-gray-50">
-          <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-500 hover:text-red-600 transition-colors">
+          <button onClick={handelLogout} className="w-full flex items-center cursor-pointer gap-3 px-4 py-3 text-gray-500 hover:text-red-600 transition-colors">
             <LogOut size={20} />
             <span className="font-medium">Logout</span>
           </button>
