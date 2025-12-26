@@ -17,7 +17,7 @@ class LoanController extends Controller
         $loans  = Loan::where('user_id', $user)->with('book')->get();
         return response()->json([
             'message' => 'All Books loans',
-            'books' => $loans
+            'loans' => $loans
         ]);
     }
 

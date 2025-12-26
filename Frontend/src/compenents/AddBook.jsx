@@ -23,6 +23,10 @@ formData.append("image", image);
   alert("Erreur lors de l'ajout");
 }
 
+setTitle("");
+setAuthor("");
+setImage(null);
+
  }
 
 

@@ -1,19 +1,41 @@
 import { X } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AddLoan from './AddLoan'
+import { BookContext } from '../Context/BookContext'
+import { ReadContext } from '../Context/ReadContext'
 
-function BookDetails() {
+function BookDetails({book}) {
     const [open, setOpen] = useState(false)
+    const [currentBook, setCurrentBook] = useState(null);
+    const {ShowBook} = useContext(BookContext);
+    const {AddReading} = useContext(ReadContext);
+    const [select,setSelect] = useState(null)
+    
+
+    useEffect(()=>{
+    const fetchBook = async () => {
+      const data = await ShowBook(book); 
+      setCurrentBook(data); 
+    };
+    fetchBook();
+  }, [book]);
+
+   const handleReading = async () => {
+       await AddReading(book);
+   } 
+
+    if (!currentBook) return <p>Laoding ...</p>;
+
   return (
     <>
           <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">your Book</h2>
           <hr class="border-gray-200 mb-8" />
-         
+    <div>    
   <div class="flex flex-row gap-8 items-start mb-12">
     
     <div class="w-48 flex-shrink-0">
       <img 
-        src="/public/read.webp" 
+        src={currentBook.image}
         alt="The Lies We Inherit" 
         class="rounded-lg shadow-lg w-full h-auto object-cover"
       />
@@ -21,17 +43,17 @@ function BookDetails() {
 
     <div class="flex-1">
       <h1 class="text-2xl font-bold text-gray-900 leading-tight">
-        The Lies We Inherit
+        {currentBook.title}
       </h1>
-      <p class="text-gray-500 mt-1 mb-6">Angela R. Key</p>
+      <p class="text-gray-500 mt-1 mb-6">{currentBook.author}</p>
       
       <div class="w-full border-t border-gray-200 mb-8"></div>
 
       <div class="space-y-3 max-w-xs">
-        <button class="w-full bg-[#800018] hover:bg-[#600012] text-white font-semibold py-3 px-6 rounded-full transition duration-200">
+        <button onClick={handleReading} class="w-full bg-[#800018] hover:bg-[#600012] text-white font-semibold py-3 px-6 rounded-full transition duration-200">
           Start to read
         </button>
-        <button onClick={() => setOpen(true)} class="w-full bg-[#1e2d42] hover:bg-[#15202f] text-white font-semibold py-3 px-6 rounded-full transition duration-200">
+        <button onClick={() => {setOpen(true); setSelect(currentBook.id);}} class="w-full bg-[#1e2d42] hover:bg-[#15202f] text-white font-semibold py-3 px-6 rounded-full transition duration-200">
           Add to loan
         </button>
       </div>
@@ -48,6 +70,7 @@ function BookDetails() {
       Delete
     </button>
   </div>
+  </div> 
 {open && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white rounded-3xl shadow-xl w-full max-w-lg p-8 relative">
@@ -58,7 +81,7 @@ function BookDetails() {
             >
               <X />
             </button>
-          <AddLoan/>
+          <AddLoan book={select}/>
           </div>
         </div>
       )}

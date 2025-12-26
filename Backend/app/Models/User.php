@@ -27,10 +27,15 @@ class User extends Authenticatable
      public function book(){
         return $this->hasMany(Book::class);
     }
+    
      public function reading(){
         return $this->hasMany(Reading::class);
     }
 
+     public function loans()
+    {
+        return $this->hasMany(Loan::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

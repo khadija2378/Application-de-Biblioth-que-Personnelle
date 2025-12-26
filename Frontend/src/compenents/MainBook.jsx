@@ -1,11 +1,21 @@
 import { PlusCircle, X } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AddBook from './AddBook'
 import BookDetails from './BookDetails'
+import { BookContext } from '../Context/BookContext'
 
 function MainBook() {
   const [open, setOpen] = useState(false)
   const [openBook, setOpenBook] = useState(false)
+  const [select,setSelect] = useState(null)
+  const {GetBooks , books} = useContext(BookContext);
+
+  useEffect(()=>{
+   
+     GetBooks()
+  
+
+  },[])
 
   return (
     <>
@@ -13,23 +23,14 @@ function MainBook() {
         <h3 className="text-lg font-bold text-gray-800 mb-6">Your Books</h3>
 
         <div className="grid grid-cols-5 gap-4">
-          <div  onClick={() => setOpenBook(true)} className="flex flex-col items-center cursor-pointer">
-            <img src="/public/read.webp" className="rounded-xl h-48 w-33" />
-            <h2 className="font-medium">Funaire</h2>
-            <p className="text-gray-600">Aykroyd</p>
+            {books.map((book)=>(
+            <div key={book.id}  onClick={() =>{ setOpenBook(true); setSelect(book.id); }} className="flex flex-col items-center cursor-pointer">
+            <img src={book.image} className="rounded-xl h-48 w-33" />
+            <h2 className="font-medium">{book.title}</h2>
+            <p className="text-gray-600">{book.author}</p>
           </div>
-
-          <div className="flex flex-col items-center">
-            <img src="/public/read1.webp" className="rounded-xl h-48 w-33" />
-            <h2 className="font-medium">Under</h2>
-            <p className="text-gray-600">Peters</p>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <img src="/public/read2.webp" className="rounded-xl h-48 w-33" />
-            <h2 className="font-medium">Hello</h2>
-            <p className="text-gray-600">Stephanie</p>
-          </div>
+            ))}
+          
 
           <button  onClick={() => setOpen(true)} className="flex flex-col items-center justify-center cursor-pointer border-2 border-dashed border-slate-200 rounded-xl h-48 w-33 hover:bg-slate-50 transition-colors group">
           <PlusCircle className="text-slate-400 group-hover:text-red-800 mb-2" size={32} />
@@ -62,7 +63,7 @@ function MainBook() {
             >
               <X />
             </button>
-          <BookDetails/>
+          <BookDetails book={select}/>
           </div>
         </div>
       )}

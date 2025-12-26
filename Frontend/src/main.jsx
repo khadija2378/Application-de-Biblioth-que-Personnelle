@@ -5,15 +5,21 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './Context/AuthContext.jsx'
 import { BookProvider } from './Context/BookContext.jsx'
+import { LoanContext, LoanProvider } from './Context/LoanContext.jsx'
+import { ReadProvider } from './Context/ReadContext.jsx'
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
       <BookProvider>
+        <LoanProvider>
+          <ReadProvider>
     <BrowserRouter>
     <App />
     </BrowserRouter>
+    </ReadProvider>
+    </LoanProvider>
     </BookProvider>
     </AuthProvider>
     

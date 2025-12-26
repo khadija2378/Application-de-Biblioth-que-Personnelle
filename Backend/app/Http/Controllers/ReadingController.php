@@ -5,41 +5,43 @@ namespace App\Http\Controllers;
 use App\Models\Reading;
 use App\Http\Requests\StoreReadingRequest;
 use App\Http\Requests\UpdateReadingRequest;
+use App\Models\Book;
 use Illuminate\Support\Facades\Auth;
 
 class ReadingController extends Controller
 {
-    
+
     public function index()
     {
         $user=Auth::id();
         $readings  = Reading::where('user_id', $user)->with('book')->get();
         return response()->json([
             'message' => 'All Reding books',
-            'books' => $readings 
+            'read' => $readings
         ]);
     }
-    
+
     public function indexFinished()
     {
         $user=Auth::id();
         $readings  = Reading::where('user_id', $user)->where('status', 'finished')->with('book')->get();
         return response()->json([
             'message' => 'All Finishe Reding books',
-            'books' => $readings 
+            'books' => $readings
         ]);
     }
-    
-    public function store(StoreReadingRequest $request)
+
+    public function store(StoreReadingRequest $request, Book $book)
     {
         $readData = $request->validated();
         $readData['user_id'] = Auth::id();
+        $readData['book_id'] =$book->id;
 
         $book = Reading::create($readData);
 
         return response()->json([
             'message' => 'Book created successfully',
-            'book' => $book
+            'read' => $book
         ]);
     }
 
@@ -62,5 +64,5 @@ $reading->delete();
 return response()->json(['message' => 'Lecture supprimée']);
 }
 
-    
+
 }
