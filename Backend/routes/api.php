@@ -40,7 +40,6 @@ Route::get('/books/search', [BookController::class, 'search']);
 
 Route::resource('reading', ReadingController::class);
 Route::post('/books/{book}/reading', [ReadingController::class, 'store']);
-Route::get('/reading/index', [ReadingController::class, 'indexFinished']);
 
 //loan
 

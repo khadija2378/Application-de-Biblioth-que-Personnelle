@@ -12,7 +12,6 @@ class Reading extends Model
         'user_id',
         'book_id',
         'status',
-        'comment',
 
     ];
      public function book(){

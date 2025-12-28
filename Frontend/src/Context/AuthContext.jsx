@@ -3,6 +3,10 @@ import React, { createContext, useState } from 'react'
 export const AuthContext=createContext();
 
 export const AuthProvider = ({ children }) => {
+    const [errorR, setErrorR] = useState({});
+        const [errorL, setErrorL] = useState({});
+
+
     const [user,setUser]=useState(() => {
   return JSON.parse(localStorage.getItem("user") || "null");
 });
@@ -17,6 +21,7 @@ export const AuthProvider = ({ children }) => {
     
         }catch (err) {
       console.error("Erreur chargement user:", err);
+       setErrorR(err.response.data.errors)
 
         }   
     }
@@ -34,6 +39,12 @@ export const AuthProvider = ({ children }) => {
     };
         }catch (err) {
       console.error("Erreur chargement user:", err);
+       if (err.response?.status === 401) {
+      setErrorL({
+        email: ["Email ou mot de passe invalide"],
+        password: ["Email ou mot de passe invalide"]
+      });
+    }
         }
     }
 
@@ -52,7 +63,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
      <AuthContext.Provider
-      value={{ register , login , user , logout }}
+      value={{ register , login , user , logout , errorR , errorL}}
     >
       {children}
     </AuthContext.Provider>

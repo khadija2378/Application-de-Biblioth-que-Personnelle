@@ -6,6 +6,8 @@ export const BookProvider = ({ children }) => {
     
     const token = localStorage.getItem("token");
     const [books,setBooks]=useState([]);
+     const [error, setError] = useState({});
+    
 
     const AddBook = async(formData)=>{
         try{
@@ -13,8 +15,11 @@ export const BookProvider = ({ children }) => {
         const res=await axios.post('http://127.0.0.1:8000/api/books',formData,
         { headers: { Authorization: `Bearer ${token}` } });
         setBooks((prev)=>[...prev,res.data.book]);
+        return true;
         }catch (err) {
       console.error("Erreur chargement book:",  err.response?.data || err.message);
+      setError(err.response.data.errors);
+      return false;
         }        
 
     }
@@ -44,7 +49,7 @@ export const BookProvider = ({ children }) => {
         
   return (
      <BookContext.Provider
-      value={{ AddBook , GetBooks , ShowBook ,books}}
+      value={{ AddBook , GetBooks , ShowBook ,books , error}}
     >
       {children}
     </BookContext.Provider>

@@ -40,13 +40,17 @@ class BookController extends Controller
     }
 
     public function show(Book $book)
-    {
-        $this->authorize('view', $book);
-        return response()->json([
-            'message' => 'Book details',
-            'book' => $book
-        ]);
-    }
+{
+    $this->authorize('view', $book);
+
+    $book->load('loans');
+    $book->load('readings');
+
+    return response()->json([
+        'message' => 'Book details',
+        'book' => $book
+    ]);
+}
 
     public function update(UpdateBookRequest $request, Book $book)
     {

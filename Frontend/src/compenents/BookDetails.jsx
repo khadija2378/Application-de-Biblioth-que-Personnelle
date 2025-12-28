@@ -3,13 +3,17 @@ import React, { useContext, useEffect, useState } from 'react'
 import AddLoan from './AddLoan'
 import { BookContext } from '../Context/BookContext'
 import { ReadContext } from '../Context/ReadContext'
+import { toast } from 'react-toastify'
+import { LoanContext } from '../Context/LoanContext'
 
 function BookDetails({book}) {
     const [open, setOpen] = useState(false)
     const [currentBook, setCurrentBook] = useState(null);
     const {ShowBook} = useContext(BookContext);
     const {AddReading} = useContext(ReadContext);
+
     const [select,setSelect] = useState(null)
+
     
 
     useEffect(()=>{
@@ -21,41 +25,61 @@ function BookDetails({book}) {
   }, [book]);
 
    const handleReading = async () => {
-       await AddReading(book);
+      const res= await AddReading(book);
+      if(res){
+        toast.success("Loan ajouté avec succès");
+      }else{
+        toast.error("Erreur lors de l'ajout");
+      }
    } 
 
     if (!currentBook) return <p>Laoding ...</p>;
 
   return (
     <>
-          <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">your Book</h2>
-          <hr class="border-gray-200 mb-8" />
+          <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">your Book</h2>
+          <hr className="border-gray-200 mb-8" />
     <div>    
-  <div class="flex flex-row gap-8 items-start mb-12">
+  <div className="flex flex-row gap-8 items-start mb-12">
     
-    <div class="w-48 flex-shrink-0">
+    <div class="w-48">
       <img 
         src={currentBook.image}
         alt="The Lies We Inherit" 
-        class="rounded-lg shadow-lg w-full h-auto object-cover"
+        className="rounded-lg shadow-lg w-full h-auto object-cover"
       />
     </div>
 
-    <div class="flex-1">
-      <h1 class="text-2xl font-bold text-gray-900 leading-tight">
+    <div className="flex-1">
+      <h1 className="text-2xl font-bold text-gray-900 leading-tight">
         {currentBook.title}
       </h1>
-      <p class="text-gray-500 mt-1 mb-6">{currentBook.author}</p>
+      <p className="text-gray-500 mt-1 mb-6">{currentBook.author}</p>
       
-      <div class="w-full border-t border-gray-200 mb-8"></div>
+      <div className="w-full border-t border-gray-200 mb-8"></div>
 
-      <div class="space-y-3 max-w-xs">
-        <button onClick={handleReading} class="w-full bg-[#800018] hover:bg-[#600012] text-white font-semibold py-3 px-6 rounded-full transition duration-200">
+      <div className="space-y-3 max-w-xs">
+        <button onClick={handleReading} className={`w-full bg-[#800018] hover:bg-[#600012] text-white font-semibold py-3 px-6 rounded-full transition duration-200 ${
+    currentBook.readings.length>0 ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+  }`}
+  disabled={currentBook.readings.length>0}
+  >
           Start to read
         </button>
-        <button onClick={() => {setOpen(true); setSelect(currentBook.id);}} class="w-full bg-[#1e2d42] hover:bg-[#15202f] text-white font-semibold py-3 px-6 rounded-full transition duration-200">
-          Add to loan
-        </button>
+     <button
+  onClick={() => {
+    setSelect(currentBook.id);
+    if (currentBook.loans.length === 0) setOpen(true); 
+  }}
+  className={`w-full bg-[#1e2d42] hover:bg-[#15202f] text-white font-semibold py-3 px-6 rounded-full transition duration-200 ${
+    currentBook.loans.length>0 ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+  }`}
+  disabled={currentBook.loans.length>0}
+>
+  Add to loan
+</button>
+        
+        
       </div>
     </div>
   </div>

@@ -31,7 +31,7 @@ function Header() {
                 <p className="text-xs text-gray-400">{user.email}</p>
               </div>
               <div className="h-10 w-10 bg-red-900 rounded-full flex items-center justify-center text-white font-bold">
-                
+                {user.name[0].toUpperCase()}
               </div>
             </div>
           </div>

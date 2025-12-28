@@ -5,8 +5,10 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './Context/AuthContext.jsx'
 import { BookProvider } from './Context/BookContext.jsx'
-import { LoanContext, LoanProvider } from './Context/LoanContext.jsx'
+import { LoanProvider } from './Context/LoanContext.jsx'
 import { ReadProvider } from './Context/ReadContext.jsx'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 createRoot(document.getElementById('root')).render(
@@ -17,6 +19,7 @@ createRoot(document.getElementById('root')).render(
           <ReadProvider>
     <BrowserRouter>
     <App />
+    <ToastContainer position="top-right" autoClose={3000} />
     </BrowserRouter>
     </ReadProvider>
     </LoanProvider>

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Login(){
 
@@ -9,21 +10,24 @@ function Login(){
     const [password,setPassword]=useState("");
     const navigate = useNavigate();
    
-    const {login}=useContext(AuthContext);
+    const {login,errorL}=useContext(AuthContext);
   
     const handleSubmit = async (e) => {
+      
       e.preventDefault();
   
       const data={ 
       email,
       password,
       }
-   const result= await login(data);
-   if(!result){
-    alert('pas conncter');
-   }
-   navigate('/dashboard');
-    
+      
+    const result = await login(data);
+
+    if (result) {
+      navigate('/dashboard');
+    } else {
+      toast.error("Invalid email or password ");
+    }
   
     }
 
@@ -41,6 +45,7 @@ function Login(){
         className="w-full rounded-full bg-gray-100 px-4 py-3 text-sm
                focus:outline-none focus:ring-2 focus:ring-[#4B0016]"
       />
+      {errorL.email && <p className="text-red-600 text-sm">{errorL.email[0]}</p>}
 
       <input
         type="password"
@@ -51,6 +56,7 @@ function Login(){
         className="w-full rounded-full bg-gray-100 px-4 py-3 text-sm
                focus:outline-none focus:ring-2 focus:ring-[#4B0016]"
       />
+      {errorL.password && <p className="text-red-600 text-sm">{errorL.password[0]}</p>}
 
       <div className="text-right">
         <a href="#" class="text-xs text-gray-400 hover:text-gray-600">
@@ -60,7 +66,7 @@ function Login(){
 
       <button
         type="submit"
-        className="w-full rounded-full bg-[#800020] text-white py-3
+        className="w-full rounded-full bg-[#800020] text-white py-3 cursor-pointer
                font-medium hover:bg-[#4B0016] transition"
       >
         Log In

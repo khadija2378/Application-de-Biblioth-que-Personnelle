@@ -24,9 +24,9 @@ class StoreLoanRequest extends FormRequest
         return [
         'user_id'     => 'exists:users,id',
         'book_id'       => 'exists:books,id',
-        'borrower_name' => 'required|string|max:50',
+        'borrower_name' => 'required|string|max:10',
         'loan_date'     => 'date',
-        'return_date' => 'required|date|after_or_equal:loan_date',
+        'return_date' => 'required|date|after_or_equal:today',
         'returned'        => 'boolean',
         ];
     }
