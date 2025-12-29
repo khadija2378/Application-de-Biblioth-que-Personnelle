@@ -38,7 +38,7 @@ export const LoanProvider = ({ children }) => {
 
     const DeleteLoan = async(id) =>{
         try{
-            const res= await axios.delete(`http://127.0.0.1:8000/api/reading/${id}`,
+            const res= await axios.delete(`http://127.0.0.1:8000/api/loan/${id}`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
              setLoans(prev =>
@@ -51,10 +51,29 @@ export const LoanProvider = ({ children }) => {
         }
     }
 
+    const ModifyLoan = async(id,data) =>{
+       try{
+            const res= await axios.put(`http://127.0.0.1:8000/api/loan/${id}`,data,
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+           setLoans(prev =>
+      prev.map(loan =>
+        loan?.id === id ? res.data.loan : loan
+      )
+    );
+    
+            return true;
+        }catch(err){
+        console.error("Erreur modification loan:",  err.response?.data || err.message);
+        
+        return false;
+        }
+    }
+
    
   return (
      <LoanContext.Provider
-      value={{ AddLoan , GetLoans , loans , error , DeleteLoan}}
+      value={{ AddLoan , GetLoans , loans , error , DeleteLoan , ModifyLoan}}
     >
       {children}
     </LoanContext.Provider>

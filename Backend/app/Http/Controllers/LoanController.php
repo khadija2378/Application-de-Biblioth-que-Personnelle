@@ -53,8 +53,10 @@ class LoanController extends Controller
         $loan->update($loans);
 
 
-return response()->json($loan);
-}
+return response()->json([
+    'message' => 'Loan created successfully',
+    'loan' => $loan->load('book')
+]);}
 
 
 public function destroy(Loan $loan)

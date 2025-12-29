@@ -6,6 +6,7 @@ import Navbar from './compenents/NavBar'
 import Auth from './page/Auth'
 import Home from './page/Home'
 import DashboardUser from './page/DashboardUser'
+import MainBook from './compenents/MainBook'
 
 function App() {
     const location = useLocation();

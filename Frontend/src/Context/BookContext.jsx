@@ -46,10 +46,38 @@ export const BookProvider = ({ children }) => {
 
         }
     }
+
+    const DeleteBook = async(id) =>{
+      try{
+              const res = await axios.delete(`http://127.0.0.1:8000/api/books/${id}`,
+                { headers: { Authorization: `Bearer ${token}` } });
+                setBooks(prev => prev.filter(book => book.id !== id))
+                return true;
+      }catch(err){
+        console.error("Erreur chargement book:",  err.response?.data || err.message);
+        return false;
+    }
+    }    
+    const ModifyBook = async(id,data) =>{
+       try{
+            const res= await axios.put(`http://127.0.0.1:8000/api/books/${id}`,data,
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+             setBooks(prev =>
+      prev.map(book =>
+        book.id === id ? res.data.book : book
+      )
+    );
+            return true;
+        }catch(err){
+        console.error("Erreur modification loan:",  err.response?.data || err.message);
         
+        return false;
+        }
+    }  
   return (
      <BookContext.Provider
-      value={{ AddBook , GetBooks , ShowBook ,books , error}}
+      value={{ AddBook , GetBooks , ShowBook ,books , error , DeleteBook,ModifyBook}}
     >
       {children}
     </BookContext.Provider>

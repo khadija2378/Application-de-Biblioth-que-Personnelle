@@ -22,11 +22,12 @@ class UpdateLoanRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'book_id'=> 'exists:books,id',
-        'borrower_name' => 'sometimes|string|max:50',
-        'loan_date' => 'sometimes|date',
-        'return_date_expected' => 'sometimes|date|after_or_equal:loan_date',
-        'status' => 'string|in:pending,returned,late',
+          'user_id'     => 'exists:users,id',
+        'book_id'       => 'exists:books,id',
+        'borrower_name' => 'sometimes|string|max:10',
+        'loan_date'     => 'date',
+        'return_date' => 'sometimes|date|after_or_equal:today',
+        'returned'        => 'boolean',
         ];
     }
 }

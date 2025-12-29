@@ -2,13 +2,15 @@ import { CloudDownload } from 'lucide-react'
 import React, { useContext, useState } from 'react'
 import { BookContext } from '../Context/BookContext';
 import { toast } from 'react-toastify';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-function AddBook() {
+function ModifyBook() {
 
  const [title,setTitle]=useState("");
  const [author,setAuthor]=useState("");
  const [image,setImage]=useState(null);
- const {AddBook , error}=useContext(BookContext);
+ const {AddBook}=useContext(BookContext);
+
 
 
  const handleBook = async (e) => {
@@ -20,34 +22,31 @@ formData.append("image", image);
     
    const result= await AddBook(formData);
  if (result) {
- toast.success("Add book !");
- setTitle("");
-setAuthor("");
-setImage(null);
+ toast.success("modify book !");
 } else {
    toast.error("Error while adding book !");
 }
+
+
 
  }
 
 
   return (
     <>
-     <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Add your Book</h2>
+     <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Modify your Book</h2>
     <hr class="border-gray-200 mb-8" />
  <form onSubmit={handleBook} action="">
     <div class="space-y-6">
       <div>
         <label class="block text-gray-700 font-medium mb-2">Title</label>
         <input name='title' value={title} onChange={(e)=>setTitle(e.target.value)} type="text" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-800 focus:outline-none transition" placeholder=""/>
-        {error.title && <p className="text-red-600 text-sm">{error.title[0]}</p>}
 
       </div>
 
       <div>
         <label class="block text-gray-700 font-medium mb-2">Author</label>
         <input name='author' value={author} onChange={(e)=>setAuthor(e.target.value)} type="text" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-800 focus:outline-none transition" placeholder=""/>
-              {error.author && <p className="text-red-600 text-sm">{error.author[0]}</p>}
 
       </div>
 
@@ -63,14 +62,13 @@ setImage(null);
         <p class="text-gray-400 text-sm mb-6 text-center">Supported Format : jpg,jpeg,png,webp</p></>)}
         <input id="dropzone-file" name='image' onChange={(e)=>setImage(e.target.files[0])} type="file" class="hidden" />
       </label> 
-              {error.image && <p className="text-red-600 text-sm">{error.image[0]}</p>}
 
     </div>
 
     <div class="flex justify-end gap-4 mt-10">
       
       <button type='submit' class="px-8 py-2 cursor-pointer bg-[#800020] text-white font-semibold rounded-xl hover:bg-[#4B0016] transition shadow-md">
-        Confirm
+        Modify
       </button>   
     </div>
     </form>
@@ -78,4 +76,4 @@ setImage(null);
   )
 }
 
-export default AddBook
+export default ModifyBook;
