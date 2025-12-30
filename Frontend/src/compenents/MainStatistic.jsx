@@ -1,8 +1,10 @@
+
 import { BookCopy, BookOpenCheck, LibraryBig } from 'lucide-react'
 import React, { useContext, useEffect } from 'react'
 import { BookContext } from '../Context/BookContext';
 import { ReadContext } from '../Context/ReadContext';
 import { LoanContext } from '../Context/LoanContext';
+import LineChart from './LineChart';
 
 function MainStatistic() {
 
@@ -53,9 +55,7 @@ function MainStatistic() {
 
           <div className="bg-white rounded-xl p-8 border border-gray-100 min-h-[400px]">
             <h3 className="text-lg font-bold text-gray-800 mb-6">Latest addition</h3>
-            <div className="border-2 border-dashed border-gray-100 rounded-2xl h-64 flex items-center justify-center">
-                <p className="text-gray-400 italic">No books added recently</p>
-            </div>
+            <LineChart/>
           </div>
         </div>
   )

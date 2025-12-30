@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { LoanContext } from '../Context/LoanContext';
 import { toast } from 'react-toastify';
 
-function AddLoan({book}) {
+function AddLoan({book , onSuccess}) {
      const [borrower_name,setBorrowerName]=useState("");
      const [return_date,setReturnDate]=useState("");
      const {AddLoan,error} = useContext(LoanContext);
@@ -16,8 +16,7 @@ function AddLoan({book}) {
    const result= await AddLoan(book,data);
 if (result) {
   toast.success("Loan ajouté avec succès");
-  setBorrowerName('');
-  setReturnDate('');
+   onSuccess && onSuccess(result);
 } else {
   toast.error("Erreur lors de l'ajout");
 }

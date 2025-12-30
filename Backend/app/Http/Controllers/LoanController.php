@@ -41,7 +41,9 @@ class LoanController extends Controller
     {
          $this->authorize('update', $loan);
         $loan->update(['returned' => true]);
-        return response()->json(['message' => 'Book rendu']);
+        return response()->json([
+    'loan' => $loan->load('book')
+]);
     }
 
     public function update(UpdateLoanRequest $request, Loan $loan)

@@ -70,11 +70,15 @@ function MainRead() {
           <td className="px-6 py-4">{read.book?.title}</td>
           <td className="px-6 py-4">{read.book?.author}</td>
           <td className="px-6 py-4">
-            <div className="py-1.5 px-2.5 bg-amber-50 rounded-full flex items-center justify-center w-20 gap-1">
-              <span className="font-medium text-xs text-amber-600">
-                {read.status}
-              </span>
-            </div>
+            {read.status === "reading" ? (
+    <div className="py-1.5 px-2.5 bg-amber-50 rounded-full flex justify-center w-20">
+      <span className="font-medium text-xs text-amber-600">reading</span>
+    </div>
+  ) : (
+    <div className="py-1.5 px-2.5 bg-emerald-50 rounded-full flex justify-center w-20">
+      <span className="font-medium text-xs text-emerald-600">finished</span>
+    </div>
+  )}
           </td>
           <td className="px-6 py-4">
             <button  onClick={() => deleteRead(read.id)}  className='cursor-pointer'><BadgeX color="red" /></button>

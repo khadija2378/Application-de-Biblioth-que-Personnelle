@@ -46,7 +46,15 @@ export const BookProvider = ({ children }) => {
 
         }
     }
-
+    const SearchBook = async(book) =>{
+      try{
+         const res = await axios.get(`http://127.0.0.1:8000/api/books/search/${book}`,
+          { headers: { Authorization: `Bearer ${token}` } });
+          return res.data.book;
+      }catch(err){
+        console.error("Erreur chargement book:",  err.response?.data || err.message);
+    }
+  }
     const DeleteBook = async(id) =>{
       try{
               const res = await axios.delete(`http://127.0.0.1:8000/api/books/${id}`,
@@ -58,26 +66,27 @@ export const BookProvider = ({ children }) => {
         return false;
     }
     }    
-    const ModifyBook = async(id,data) =>{
-       try{
-            const res= await axios.put(`http://127.0.0.1:8000/api/books/${id}`,data,
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
-             setBooks(prev =>
+    const UpdateBook = async (id, data) => {
+    try {
+      const res = await axios.patch(`http://127.0.0.1:8000/api/books/${id}`, data, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      
+      setBooks(prev =>
       prev.map(book =>
-        book.id === id ? res.data.book : book
+        book?.id === id ? res.data.book : book
       )
     );
+    
             return true;
-        }catch(err){
-        console.error("Erreur modification loan:",  err.response?.data || err.message);
-        
-        return false;
-        }
-    }  
+    } catch (err) {
+      console.error("Erreur ModifyBook:", err.response?.data || err.message);
+      return false;
+    }
+  };
   return (
      <BookContext.Provider
-      value={{ AddBook , GetBooks , ShowBook ,books , error , DeleteBook,ModifyBook}}
+      value={{ AddBook , GetBooks , ShowBook ,books , error , DeleteBook, UpdateBook , SearchBook}}
     >
       {children}
     </BookContext.Provider>

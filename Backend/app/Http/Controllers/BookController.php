@@ -89,16 +89,15 @@ class BookController extends Controller
     }
 
     public function search(Request $request){
-       if($request->ajax()){
-        $request->validate([
-        'search' => 'required|string'
-    ]);
-        $data=Book::where('user_id', Auth::id())->where('title', 'like', '%'.$request->search.'%')
-        ->orWhere('author', 'like', '%'.$request->search.'%')->get();
-         return response()->json([
-            'message' => 'this book',
-            'book' => $data
-        ]);
-       }
+      {
+    $search = $request->query('search');
+
+    $books = Book::when($search, function ($query, $search) {
+        $query->where('title', 'like', "%{$search}%")
+              ->orWhere('author', 'like', "%{$search}%");
+    })->get();
+
+    return response()->json($books);
+}
     }
 }

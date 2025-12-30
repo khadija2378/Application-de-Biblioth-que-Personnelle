@@ -21,15 +21,6 @@ class ReadingController extends Controller
         ]);
     }
 
-    public function indexFinished()
-    {
-        $user=Auth::id();
-        $readings  = Reading::where('user_id', $user)->where('status', 'finished')->with('book')->get();
-        return response()->json([
-            'message' => 'All Finishe Reding books',
-            'books' => $readings
-        ]);
-    }
 
     public function store(StoreReadingRequest $request, Book $book)
     {
@@ -52,7 +43,10 @@ class ReadingController extends Controller
         $reading->update(['status'=>'finished']);
 
 
-return response()->json($reading);
+return response()->json([
+    'reading' => $reading->load('book')
+]);
+
 }
 
 

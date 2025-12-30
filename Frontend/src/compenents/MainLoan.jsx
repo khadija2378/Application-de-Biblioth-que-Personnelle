@@ -11,7 +11,8 @@ function MainLoan() {
     
 
     useEffect(()=>{
-      GetLoans();
+     GetLoans();
+
     },[])
 
     const deleteLoans =async(id)=>{
@@ -22,8 +23,10 @@ function MainLoan() {
     toast.error("Error deleting loan");
        }
     }
-
+    const date = new Date();
     const loansReturned =loans.filter((loan)=>loan.returned === 1);
+    const loansLate =loans.filter((loan)=>loan.returned === 0 && new Date(loan.return_date) < date);
+
 
   return (
     <div className="flex-1 overflow-y-auto p-4">
@@ -49,7 +52,7 @@ function MainLoan() {
               <div className="bg-white rounded-xl p-10 flex justify-between items-center border border-gray-100 relative overflow-hidden ">
                 <div className="z-10">
                   <h2 className="text-xl font-medium text-gray-800 mb-2">Books Late</h2>
-                  <p className="text-gray-500 font-bold text-2xl">40</p>
+                  <p className="text-gray-500 font-bold text-2xl">{loansLate.length}</p>
                 </div>
                 <div className="w-12 h-12 bg-[#E9EBF8] rounded-full flex items-center justify-center mb-6">
                 <TimerReset color='#800020'/>
@@ -110,7 +113,7 @@ function MainLoan() {
     <div className="py-1.5 px-2.5 bg-emerald-50 rounded-full flex justify-center w-20">
       <span className="font-medium text-xs text-emerald-600">Returned</span>
     </div>
-  ) : new Date(loan.return_date) < new Date() ? (
+  ) : new Date(loan.return_date) < date ? (
     <div className="py-1.5 px-2.5 bg-red-50 rounded-full flex justify-center w-20">
       <span className="font-medium text-xs text-red-600">Late</span>
     </div>
@@ -142,7 +145,10 @@ function MainLoan() {
               <X />
             </button>
 
-            <ModifyLoan loan={select} />
+            <ModifyLoan loan={select} onSuccess={() => {
+    setOpenLoan(false);
+    GetLoans(); 
+  }} />
           </div>
         </div>
       )}

@@ -1,79 +1,118 @@
 import { CloudDownload } from 'lucide-react'
-import React, { useContext, useState } from 'react'
-import { BookContext } from '../Context/BookContext';
-import { toast } from 'react-toastify';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react'
+import { BookContext } from '../Context/BookContext'
+import { toast } from 'react-toastify'
 
-function ModifyBook() {
+function ModifyBook({ book ,onSuccess }) {
 
- const [title,setTitle]=useState("");
- const [author,setAuthor]=useState("");
- const [image,setImage]=useState(null);
- const {AddBook}=useContext(BookContext);
+  const [title, setTitle] = useState("")
+  const [author, setAuthor] = useState("")
+  const [image, setImage] = useState(null)
 
+  const { UpdateBook } = useContext(BookContext)
 
+  useEffect(() => {
+    if (book) {
+      setTitle(book.title)
+      setAuthor(book.author)
+      setImage(book.image) 
+    }
+  }, [book])
 
- const handleBook = async (e) => {
-   e.preventDefault();
-const formData = new FormData();
-formData.append("title", title);
-formData.append("author", author);
-formData.append("image", image);
-    
-   const result= await AddBook(formData);
- if (result) {
- toast.success("modify book !");
-} else {
-   toast.error("Error while adding book !");
-}
+  const handleBook = async (e) => {
+    e.preventDefault()
 
+    const data = new FormData()
+    data.append("title", title)
+    data.append("author", author)
 
+    if (image instanceof File) {
+      data.append("image", image)
+    }
 
- }
+    const updated = await UpdateBook(book.id, data)
 
+   if (updated) {
+      toast.success("Book modified successfully ✅");
+      onSuccess && onSuccess(updated); 
+    } else {
+      toast.error("Error while modifying book ❌");
+    }
+  
+  }
 
   return (
     <>
-     <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Modify your Book</h2>
-    <hr class="border-gray-200 mb-8" />
- <form onSubmit={handleBook} action="">
-    <div class="space-y-6">
-      <div>
-        <label class="block text-gray-700 font-medium mb-2">Title</label>
-        <input name='title' value={title} onChange={(e)=>setTitle(e.target.value)} type="text" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-800 focus:outline-none transition" placeholder=""/>
+      <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+        Modify your Book
+      </h2>
 
-      </div>
+      <hr className="border-gray-200 mb-8" />
 
-      <div>
-        <label class="block text-gray-700 font-medium mb-2">Author</label>
-        <input name='author' value={author} onChange={(e)=>setAuthor(e.target.value)} type="text" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-800 focus:outline-none transition" placeholder=""/>
+      <form onSubmit={handleBook}>
+        <div className="space-y-6">
 
-      </div>
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">Title</label>
+            <input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              type="text"
+              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-800 focus:outline-none"
+            />
+          </div>
 
-       <label for="dropzone-file" class="border-2 border-gray-300 cursor-pointer rounded-2xl p-4 flex flex-col items-center justify-center bg-white border-dashed hover:border-[#800020]">
-        
-        
-         {image ? (<img src={image.name} alt="Preview" className="w-20  object-cover rounded-xl "/>) : 
-         (<>
-         <div class="bg-gray-100 p-3 rounded-full mb-4">
-          <CloudDownload color='#800020'/>
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">Author</label>
+            <input
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
+              type="text"
+              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-800 focus:outline-none"
+            />
+          </div>
+
+          <label className="border-2 border-dashed border-gray-300 cursor-pointer rounded-2xl p-4 flex flex-col items-center hover:border-[#800020]">
+
+            {image ? (
+              <img
+                src={
+                  image instanceof File
+                    ? URL.createObjectURL(image)
+                    : image
+                }
+                alt="Preview"
+                className="w-24 h-24 object-cover rounded-xl"
+              />
+            ) : (
+              <>
+                <div className="bg-gray-100 p-3 rounded-full mb-4">
+                  <CloudDownload color="#800020" />
+                </div>
+                <p className="font-bold text-gray-800">Select Image</p>
+              </>
+            )}
+
+            <input
+              type="file"
+              className="hidden"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+          </label>
+
         </div>
-         <p class="font-bold text-gray-800 mb-2 text-lg">Select Image to Upload</p>
-        <p class="text-gray-400 text-sm mb-6 text-center">Supported Format : jpg,jpeg,png,webp</p></>)}
-        <input id="dropzone-file" name='image' onChange={(e)=>setImage(e.target.files[0])} type="file" class="hidden" />
-      </label> 
 
-    </div>
-
-    <div class="flex justify-end gap-4 mt-10">
-      
-      <button type='submit' class="px-8 py-2 cursor-pointer bg-[#800020] text-white font-semibold rounded-xl hover:bg-[#4B0016] transition shadow-md">
-        Modify
-      </button>   
-    </div>
-    </form>
+        <div className="flex justify-end mt-10">
+          <button
+            type="submit"
+            className="px-8 py-2 bg-[#800020] text-white font-semibold cursor-pointer rounded-xl hover:bg-[#4B0016]"
+          >
+            Modify
+          </button>
+        </div>
+      </form>
     </>
   )
 }
 
-export default ModifyBook;
+export default ModifyBook

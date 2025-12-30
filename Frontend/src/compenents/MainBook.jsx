@@ -63,7 +63,10 @@ function MainBook() {
             >
               <X />
             </button>
-          <BookDetails book={select}/>
+          <BookDetails book={select} onSucces={() => {
+    setOpenBook(false);
+    GetBooks()
+  }}/>
           </div>
         </div>
       )}

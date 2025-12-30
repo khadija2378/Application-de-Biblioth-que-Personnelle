@@ -70,10 +70,26 @@ export const LoanProvider = ({ children }) => {
         }
     }
 
+    const BookReturne = async(id) =>{
+        try{
+         const res= await axios.put(`http://127.0.0.1:8000/api/loan/returnBook/${id}`,{},
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            setLoans(prev =>
+  prev.map(r =>
+    r.id === id ? res.data.reading : r
+  )
+);
+        }catch(err){
+        console.error("Erreur chargement book:",  err.response?.data || err.message);
+        return false;
+        }
+    }
+
    
   return (
      <LoanContext.Provider
-      value={{ AddLoan , GetLoans , loans , error , DeleteLoan , ModifyLoan}}
+      value={{ AddLoan , GetLoans , loans , error , DeleteLoan , ModifyLoan , BookReturne}}
     >
       {children}
     </LoanContext.Provider>

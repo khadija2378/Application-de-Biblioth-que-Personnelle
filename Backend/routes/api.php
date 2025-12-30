@@ -45,7 +45,7 @@ Route::post('/books/{book}/reading', [ReadingController::class, 'store']);
 
 Route::resource('loan', LoanController::class);
 Route::post('/books/{book}/loans', [LoanController::class, 'store']);
-Route::get('/loan/returnBook', [LoanController::class, 'returnBook']);
+Route::put('/loan/returnBook/{loan}', [LoanController::class, 'returnBook']);
 
 });
 

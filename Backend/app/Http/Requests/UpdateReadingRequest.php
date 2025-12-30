@@ -24,8 +24,7 @@ class UpdateReadingRequest extends FormRequest
         return [
         'user_id'     => 'exists:users,id',
         'book_id'     => 'exists:books,id',
-        'comment'     => 'sometimes|string|max:50',
-        'status'      => 'string|in:unread,reading,finished',
+        'status'      => 'string|in:reading,finished',
         ];
     }
 }
