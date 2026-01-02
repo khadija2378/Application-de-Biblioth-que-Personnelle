@@ -13,11 +13,11 @@ class AuthController extends Controller
 {
     public function index()
     {
-        
+
         $user = User::all();
         return response()->json([
             'message' => 'All user',
-            'books' => $user
+            'users' => $user
         ]);
     }
 
@@ -65,11 +65,18 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Mot de passe réinitialisé']);
     }
-     
+
      public function logout()
     {
         Auth::user()->currentAccessToken()->delete();
 
         return response()->json(['message' => 'Déconnexion réussie']);
     }
+
+    public function destroy(User $user)
+{
+      $user->delete();
+
+return response()->json(['message' => 'user deleted']);
+}
 }

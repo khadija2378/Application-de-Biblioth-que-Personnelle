@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../Context/AuthContext'
 import { BookContext } from '../Context/BookContext';
 
-function Header() {
+function HeaderA() {
     const {user}=useContext(AuthContext);
     const {SearchBook}=useContext(BookContext);
      const [search, setSearch] = useState('')
@@ -18,7 +18,7 @@ function Header() {
     <header className="h-20 bg-white flex items-center justify-between px-8 border-b border-gray-100">
           <div className="relative w-96">
             <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
-              <Search size={18}  color='#800020'/>
+              <Search size={18}  color='#4B49AC'/>
             </span>
             <input
               type="text"
@@ -37,9 +37,9 @@ function Header() {
             <div className="flex flex-row-reverse items-center gap-3 border-l pl-6">
               <div className="text-left">
                 <p className="text-sm font-bold text-gray-800">{user.name}</p>
-                <p className="text-xs text-gray-400">{user.email}</p>
+                <p className="text-xs text-gray-400">{user.role}</p>
               </div>
-              <div className="h-10 w-10 bg-red-900 rounded-full flex items-center justify-center text-white font-bold">
+              <div className="h-10 w-10 bg-[#4B49AC] rounded-full flex items-center justify-center text-white font-bold">
                 {user.name[0].toUpperCase()}
               </div>
             </div>
@@ -48,4 +48,4 @@ function Header() {
   )
 }
 
-export default Header
+export default HeaderA

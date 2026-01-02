@@ -33,8 +33,9 @@ Route::post('/logout',[AuthController::class,'logout']);
 
 //Books
 
-Route::resource('books', BookController::class);
 Route::get('/books/search', [BookController::class, 'search']);
+Route::resource('books', BookController::class);
+
 
 //Reading
 
@@ -48,5 +49,9 @@ Route::post('/books/{book}/loans', [LoanController::class, 'store']);
 Route::put('/loan/returnBook/{loan}', [LoanController::class, 'returnBook']);
 
 });
+Route::middleware('auth:sanctum','role:admin')->group(function(){
+Route::get('/users', [AuthController::class, 'index']);
+Route::delete('/user/{user}', [AuthController::class, 'destroy']);
 
-Route::get('/user', [AuthController::class, 'index'])->middleware('auth:sanctum','role:admin');
+
+});

@@ -55,9 +55,10 @@ export const ReadProvider = ({ children }) => {
             );
             setReadings(prev =>
   prev.map(r =>
-    r.id === id ? res.data.reading : r
+    r?.id === id ? res.data.reading : r
   )
 );
+return true;
         }catch(err){
         console.error("Erreur chargement book:",  err.response?.data || err.message);
         return false;

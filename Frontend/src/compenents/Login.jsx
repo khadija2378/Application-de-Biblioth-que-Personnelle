@@ -23,10 +23,12 @@ function Login(){
       
     const result = await login(data);
 
-    if (result) {
-      navigate('/dashboard');
+   if (result?.user?.role === "user") {
+      navigate("/dashboard");
+    } else if (result?.user?.role === "admin") {
+      navigate("/dashboardAdmin");
     } else {
-      toast.error("Invalid email or password ");
+      toast.error("Invalid email or password");
     }
   
     }

@@ -21,10 +21,10 @@ export default function Navbar() {
     </div>
     <div className="flex gap-3">
       <Link to="/login">
-            <button className="px-5 py-1.5 border border-[#800020] text-[#800020] rounded-full font-semibold hover:text-[#fff] hover:bg-[#800020] transition-colors duration-200">Log in</button>
+            <button className="px-5 py-1.5 border border-[#800020] text-[#800020] rounded-full font-semibold cursor-pointer hover:text-[#fff] hover:bg-[#800020] transition-colors duration-200">Log in</button>
       </Link>
       <Link to="/register">
-            <button className="px-5 py-1.5 bg-[#800020] text-white rounded-full font-semibold hover:bg-[#4B0016] transition-colors duration-200">Sign up</button>
+            <button className="px-5 py-1.5 bg-[#800020] text-white rounded-full cursor-pointer font-semibold hover:bg-[#4B0016] transition-colors duration-200">Sign up</button>
       </Link>
     </div>
   </nav>

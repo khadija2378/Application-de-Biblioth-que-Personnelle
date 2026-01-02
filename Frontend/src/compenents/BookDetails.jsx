@@ -112,10 +112,10 @@ function BookDetails({ book , onSucces}) {
               </button>
             ) : (
               <button
-                onClick={() => handleModifyReading(currentBook.readings?.[0]?.id)}
-                disabled={currentBook.readings?.[0]?.status === 'finished'}
+                onClick={() => handleModifyReading(currentBook.readings[0].id)}
+                disabled={currentBook.readings[0].status === 'finished'}
                 className={`w-full py-3 px-6 rounded-full font-semibold transition text-white ${
-                  currentBook.readings?.[0]?.status === 'finished'
+                  currentBook.readings[0].status === 'finished'
                     ? 'bg-gray-400 cursor-not-allowed'
                     : 'bg-[#588157] hover:bg-[#3a5a40] cursor-pointer'
                 }`}

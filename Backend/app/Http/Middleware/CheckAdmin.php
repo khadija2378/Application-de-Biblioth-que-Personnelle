@@ -16,7 +16,7 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
-        if(Auth::user()->role === $role){
+        if(Auth::user()->role !== $role){
           return response()->json(['message' => 'Accès refusé, rôle non autorisé.']);
         }
         return $next($request);

@@ -25,6 +25,7 @@ function ModifyBook({ book ,onSuccess }) {
     const data = new FormData()
     data.append("title", title)
     data.append("author", author)
+    data.append("_method", "PUT")
 
     if (image instanceof File) {
       data.append("image", image)

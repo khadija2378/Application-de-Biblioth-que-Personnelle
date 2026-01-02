@@ -28,7 +28,7 @@ export default function AuthCard() {
               onClick={() => setFlip(true)}
               className="border px-6 py-2 font-semibold rounded-full hover:bg-white hover:text-[#800020] transition"
             >
-              Sign Up
+              Sign In
             </button>
           </div>
 
@@ -40,7 +40,7 @@ export default function AuthCard() {
               onClick={() => setFlip(false)}
               className="border px-6 py-2 font-semibold rounded-full hover:bg-white hover:text-[#800020] transition"
             >
-              Sign In
+              Sign Up
             </button>
           </div>
         </div>
