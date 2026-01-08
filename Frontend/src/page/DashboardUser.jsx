@@ -28,11 +28,11 @@ const DashboardUser = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-50 font-sans">
+    <div className="flex h-full bg-gray-50 font-sans">
 
       <SideBar activeSection={activeSection} setActiveSection={setActiveSection}/>
 
-      <main className="flex-1 flex flex-col overflow-hidden">
+      <main className="flex-1 flex flex-col ">
         <Header/>
 
         {renderContent()}

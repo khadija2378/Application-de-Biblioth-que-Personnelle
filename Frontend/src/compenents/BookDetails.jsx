@@ -6,19 +6,20 @@ import { BookContext } from '../Context/BookContext'
 import { ReadContext } from '../Context/ReadContext'
 import { LoanContext } from '../Context/LoanContext'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
 
 function BookDetails({ book , onSucces}) {
+  
   const [currentBook, setCurrentBook] = useState(null)
   const [openLoan, setOpenLoan] = useState(false)
   const [openModify, setOpenModify] = useState(false)
   const [select, setSelect] = useState(null)
 
-  const navigate = useNavigate()
 
   const { ShowBook, DeleteBook } = useContext(BookContext)
   const { AddReading, ModifyReading } = useContext(ReadContext)
   const { BookReturne } = useContext(LoanContext)
+
+  
 
   // Fetch book details
   useEffect(() => {
@@ -56,6 +57,7 @@ function BookDetails({ book , onSucces}) {
 
   // Handle book return
   const handleReturnBook = async (id) => {
+    try {
     const res = await BookReturne(id)
     if (res) {
       toast.success('Book returned successfully ✅')
@@ -64,6 +66,9 @@ function BookDetails({ book , onSucces}) {
     } else {
       toast.error('Error returning book ❌')
     }
+  }catch(error){
+     console.error(error);
+  }
   }
 
   // Handle delete book
@@ -77,7 +82,10 @@ function BookDetails({ book , onSucces}) {
     }
   }
 
+  
   if (!currentBook) return <p>Loading...</p>
+
+  const activeLoan = currentBook.loans?.find(loan => loan.returned === 0);
 
   return (
     <>
@@ -102,7 +110,6 @@ function BookDetails({ book , onSucces}) {
           <div className="border-t border-gray-200 mb-8"></div>
 
           <div className="space-y-3 max-w-xs">
-            {/* Reading Button */}
             {currentBook.readings?.length === 0 ? (
               <button
                 onClick={handleReading}
@@ -124,8 +131,7 @@ function BookDetails({ book , onSucces}) {
               </button>
             )}
 
-            {/* Loan Button */}
-            {currentBook.loans?.length === 0 || currentBook.loans?.[0]?.returned === 1 ? (
+            {!activeLoan ? (
               <button
                 onClick={() => {
                   setSelect(currentBook.id)
@@ -137,8 +143,8 @@ function BookDetails({ book , onSucces}) {
               </button>
             ) : (
               <button
-                onClick={() => handleReturnBook(currentBook.loans?.[0]?.id)}
-                className="w-full py-3 px-6 rounded-full font-semibold transition bg-[#800f2f] hover:bg-[#590d22] text-white cursor-pointer"
+                onClick={() => handleReturnBook(activeLoan.id)}
+                className="w-full py-3 px-6 rounded-full font-semibold transition bg-[#2d6a4f] hover:bg-[#1b4332] text-white cursor-pointer"
               >
                 Return Book
               </button>
@@ -147,7 +153,6 @@ function BookDetails({ book , onSucces}) {
         </div>
       </div>
 
-      {/* Modify/Delete buttons */}
       <div className="flex justify-end gap-4">
         <button
           onClick={() => {
@@ -163,7 +168,6 @@ function BookDetails({ book , onSucces}) {
         </button>
       </div>
 
-      {/* Add Loan Modal */}
       {openLoan && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white rounded-3xl shadow-xl w-full max-w-lg p-8 relative">
@@ -182,7 +186,6 @@ function BookDetails({ book , onSucces}) {
         </div>
       )}
 
-      {/* Modify Book Modal */}
       {openModify && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white rounded-3xl shadow-xl w-full max-w-lg p-8 relative">

@@ -76,10 +76,11 @@ export const LoanProvider = ({ children }) => {
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             setLoans(prev =>
-  prev.map(r =>
-    r.id === id ? res.data.reading : r
+  prev.map(l =>
+    l.id === id ? res.data.loan : l
   )
 );
+        return true;
         }catch(err){
         console.error("Erreur chargement book:",  err.response?.data || err.message);
         return false;

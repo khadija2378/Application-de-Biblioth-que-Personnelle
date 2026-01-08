@@ -14,7 +14,7 @@ class ReadingController extends Controller
     public function index()
     {
         $user=Auth::id();
-        $readings  = Reading::where('user_id', $user)->with('book')->get();
+        $readings  = Reading::where('user_id', $user)->where('status','finished')->with('book')->get();
         return response()->json([
             'message' => 'All Reding books',
             'read' => $readings

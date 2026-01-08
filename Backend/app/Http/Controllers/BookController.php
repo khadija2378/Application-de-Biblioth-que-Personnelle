@@ -7,7 +7,6 @@ use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use Illuminate\Support\Facades\Auth;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
-// use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -44,8 +43,7 @@ class BookController extends Controller
 {
     $this->authorize('view', $book);
 
-    $book->load('loans');
-    $book->load('readings');
+    $book->load(['loans','readings']);
 
     return response()->json([
         'message' => 'Book details',

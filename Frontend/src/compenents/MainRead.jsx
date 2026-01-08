@@ -15,6 +15,7 @@ function MainRead() {
 
     const readCout =readings.filter((read)=>read.status === 'reading');
     const finishCout=readings.filter((read)=>read.status === 'finished');
+    
   return (
     <div className="flex-1 overflow-y-auto p-4">
             <div className="grid grid-cols-3 gap-4 mb-4">

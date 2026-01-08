@@ -24,8 +24,8 @@ function MainLoan() {
        }
     }
     const date = new Date();
-    const loansReturned =loans.filter((loan)=>loan.returned === 1);
-    const loansLate =loans.filter((loan)=>loan.returned === 0 && new Date(loan.return_date) < date);
+    const loansReturned =loans.filter((loan)=>loan?.returned === 1);
+    const loansLate =loans.filter((loan)=>loan?.returned === 0 && new Date(loan?.return_date) < date);
 
 
   return (
@@ -91,29 +91,29 @@ function MainLoan() {
         </thead>
         <tbody>
             {loans.map((loan)=>(
-               <tr key={loan.id} class="bg-neutral-primary border-b border-gray-300">
+               <tr key={loan?.id} class="bg-neutral-primary border-b border-gray-300">
                 <th class="px-6 py-4 ">
-                    <img src={loan.book?.image} className="w-10 h-10 rounded-full" alt="" />
+                    <img src={loan?.book?.image} className="w-10 h-10 rounded-full" alt="" />
                 </th>
                 <td class="px-6 py-4">
-                     {loan.book.title}
+                     {loan?.book?.title}
                 </td>
                 <td class="px-6 py-4">
-                    {loan.borrower_name}
+                    {loan?.borrower_name}
                 </td>
                 <td class="px-6 py-4">
-                   {loan.loan_date}
+                   {loan?.loan_date}
                 </td>
                 <td class="px-6 py-4">
-                    {loan.return_date}
+                    {loan?.return_date}
                 </td>
                 
                     <td className="px-6 py-4 space-y-1">
-  {loan.returned === 1 ? (
+  {loan?.returned === 1 ? (
     <div className="py-1.5 px-2.5 bg-emerald-50 rounded-full flex justify-center w-20">
       <span className="font-medium text-xs text-emerald-600">Returned</span>
     </div>
-  ) : new Date(loan.return_date) < date ? (
+  ) : new Date(loan?.return_date) < date ? (
     <div className="py-1.5 px-2.5 bg-red-50 rounded-full flex justify-center w-20">
       <span className="font-medium text-xs text-red-600">Late</span>
     </div>
