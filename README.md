@@ -18,8 +18,6 @@ Beaucoup de gens ont des livres chez eux mais ne savent pas :
 - **Backend** : Laravel (PHP)  
 - **Frontend** : React.js  
 - **Base de données** : MySQL  
-- **Gestion des rôles** : Laratrust  
-- **Déploiement** : Docker + GitHub Actions, hébergement sur Render/Railway/Heroku
 
 ---
 
@@ -71,40 +69,19 @@ Beaucoup de gens ont des livres chez eux mais ne savent pas :
 ## Design et Apparence
 
 - Pages principales :  
-  - Page de connexion  
-  - Tableau de bord  
-  - Liste de livres  
+  - Page de connexion
+  - Page d'acceuil
+  - Tableau de bord pour utilisateur
+  - Liste des livres  
   - Ajouter un livre  
-  - Mon profil  
-  - Statistiques personnelles  
+  - Mon profil
+  - Liste des livres lus
+  - Liste des livres prêtés
+  - Statistiques personnelles
+  - Tableau de bord pour Admin
 
 - Design simple, agréable et responsive.
 
----
-
-## Documentation Fournie
-
-- Cahier des charges  
-- Diagrammes UML : cas d'utilisation, classes, séquences  
-- Maquettes Figma  
-- Documentation API avec Postman  
-- Guide de déploiement (Docker + GitHub Actions)
-
----
-
-## Déploiement
-
-- **Avec Docker** : Conteneurs pour backend (Laravel), frontend (React) et base de données (MySQL).  
-- **Déploiement automatique** : Tests et déploiement via GitHub Actions à chaque push.  
-- **Hébergement** : Render, Railway ou Heroku.
-
----
-
-## Critères de Réussite Technique
-
-- Temps de chargement : < 3 secondes  
-- Mobile-friendly : 100%  
-- Bugs bloquants : 0  
 
 ---
 ### 🔗 Liens utiles
