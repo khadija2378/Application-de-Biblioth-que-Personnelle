@@ -24,16 +24,14 @@ Beaucoup de gens ont des livres chez eux mais ne savent pas :
 ## Fonctionnalités Principales
 
 ### Gérer mes livres
-- Ajouter un nouveau livre (titre, auteur, genre)  
+- Ajouter un nouveau livre (titre, auteur, image)  
 - Voir la liste de tous mes livres  
 - Chercher un livre par titre ou auteur  
 - Modifier les informations d'un livre  
 - Supprimer un livre  
 
 ### Gérer mes lectures
-- Marquer un livre comme "À lire", "En cours", "Terminé" ou "Abandonné"  
-- Noter un livre de 1 à 5 étoiles  
-- Ajouter des commentaires  
+- Marquer un livre comme "À lire", "En cours", "Terminé" 
 - Voir l'historique de lecture  
 
 ### Gérer les prêts
@@ -52,7 +50,7 @@ Beaucoup de gens ont des livres chez eux mais ne savent pas :
    Ajouter, filtrer et rechercher des livres facilement.
 
 3. **Suivi de lecture**  
-   Changer le statut d'un livre, noter et commenter.
+   Changer le statut d'un livre.
 
 4. **Gestion des prêts**  
    Ajouter des prêts, suivre les retards, visualiser les livres prêtés.
@@ -74,7 +72,6 @@ Beaucoup de gens ont des livres chez eux mais ne savent pas :
   - Tableau de bord pour utilisateur
   - Liste des livres  
   - Ajouter un livre  
-  - Mon profil
   - Liste des livres lus
   - Liste des livres prêtés
   - Statistiques personnelles
