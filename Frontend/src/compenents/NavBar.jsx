@@ -30,14 +30,10 @@ export default function Navbar({ scrollToAbout ,scrollToWork}) {
       </div>
 
       <div className="hidden md:flex gap-3">
-        <Link to="/login">
-          <button className="px-5 py-1.5 border border-[#800020] text-[#800020] rounded-full font-semibold cursor-pointer hover:text-white hover:bg-[#800020] transition-colors duration-200">
-            Log in
-          </button>
-        </Link>
+        
         <Link to="/register">
-          <button className="px-5 py-1.5 bg-[#800020] text-white rounded-full cursor-pointer font-semibold hover:bg-[#4B0016] transition-colors duration-200">
-            Sign up
+          <button className="px-5 py-2.5 bg-[#800020] text-white rounded-full cursor-pointer font-semibold hover:bg-[#4B0016] transition-colors duration-200">
+            Join Now
           </button>
         </Link>
       </div>
@@ -60,14 +56,10 @@ export default function Navbar({ scrollToAbout ,scrollToWork}) {
             How it works
           </button>
           <div className="flex gap-3 mt-2">
-            <Link to="/login" onClick={() => setIsOpen(false)}>
-              <button className="px-5 py-1.5 border border-[#800020] text-[#800020] rounded-full font-semibold cursor-pointer hover:text-white hover:bg-[#800020] transition-colors duration-200">
-                Log in
-              </button>
-            </Link>
+           
             <Link to="/register" onClick={() => setIsOpen(false)}>
               <button className="px-5 py-1.5 bg-[#800020] text-white rounded-full cursor-pointer font-semibold hover:bg-[#4B0016] transition-colors duration-200">
-                Sign up
+                Join Now
               </button>
             </Link>
           </div>

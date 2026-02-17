@@ -2,16 +2,19 @@ import { useState } from "react";
 import Login from "../compenents/Login";
 import Register from "../compenents/Register";
 import { LogIn, UserRoundPlus } from "lucide-react";
+import ResetPassword from "../compenents/ResetPassword";
 
 export default function AuthCard() {
   const [flip, setFlip] = useState(false);
+  const [showReset, setShowReset] = useState(false);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="relative w-full max-w-4xl h-[480px] bg-white rounded-xl shadow-xl overflow-hidden perspective-1200">
 
         <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-2">
-         <Login/>
+        {showReset ? <ResetPassword onForgot={() => setShowReset(false)}/> : <Login onForgot={() => setShowReset(true)} />}
+
          <Register/>
           
         </div>

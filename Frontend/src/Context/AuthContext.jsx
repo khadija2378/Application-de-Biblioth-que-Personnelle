@@ -6,6 +6,7 @@ export const AuthProvider = ({ children }) => {
     const [errorR, setErrorR] = useState({});
     const [users, setUsers] = useState([]);
         const [errorL, setErrorL] = useState({});
+        const [errorF, setErrorF] = useState({});
 
 
     const [user,setUser]=useState(() => {
@@ -74,6 +75,20 @@ export const AuthProvider = ({ children }) => {
         }  
     }
 
+    const resetPassword = async(data) =>{
+      try{
+        const res=await axios.post('http://127.0.0.1:8000/api/reset',data);
+          
+          return true;
+
+      }catch (err) {
+            console.error('Erreur chargement users:', err);
+             setErrorF(err.response.data.errors)
+            return false;
+        }  
+    }
+
+
     const deleteUser = async(id) =>{
         try{
             const res= await axios.delete(`http://127.0.0.1:8000/api/user/${id}`,
@@ -91,7 +106,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
      <AuthContext.Provider
-      value={{ register , login , user , logout , errorR , errorL , getUsers , users ,deleteUser}}
+      value={{ register , login , user , logout , errorR , errorL , errorF , getUsers , users ,deleteUser , resetPassword}}
     >
       {children}
     </AuthContext.Provider>

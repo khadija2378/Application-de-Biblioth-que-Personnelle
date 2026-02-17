@@ -27,7 +27,6 @@ function App() {
        {!hideLayout && <Navbar scrollToAbout={scrollToAbout} scrollToWork={scrollToWork}/>}
      <Routes>
       <Route path='/register' element={<Auth/>}/>
-      <Route path='/login' element={<Auth/>}/>
       <Route path='/' element={ <Home about={aboutRef} work={workRef}/> }/>
       <Route path='/dashboard' element={ <DashboardUser/> }/>
       <Route path='/dashboardAdmin' element={ <DashboardAdmin/> }/>

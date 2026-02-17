@@ -3,7 +3,7 @@ import { AuthContext } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-function Login(){
+function Login({onForgot}){
 
  
     const [email,setEmail]=useState("");
@@ -61,7 +61,7 @@ function Login(){
       {errorL.password && <p className="text-red-600 text-sm">{errorL.password[0]}</p>}
 
       <div className="text-right">
-        <a href="#" class="text-xs text-gray-400 hover:text-gray-600">
+        <a  onClick={onForgot} class="text-xs text-gray-400 hover:text-gray-600 cursor-pointer">
           Forgot password ?
         </a>
       </div>
