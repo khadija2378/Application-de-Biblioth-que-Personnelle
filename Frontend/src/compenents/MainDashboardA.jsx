@@ -45,7 +45,7 @@ function MainDashboardA() {
               </div>
 
           <div className="bg-white rounded-xl p-8 border border-gray-100 min-h-[400px]">
-            <h3 className="text-xl font-bold text-gray-800 mb-6">Latest addition</h3>
+           
              
           </div>
           </div>

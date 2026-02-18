@@ -9,7 +9,7 @@ function SideBar({ activeSection, setActiveSection }) {
 
        const handelLogout = async() =>{
       await logout();
-       navigate('/login');
+       navigate('/');
     }
 
   return (
