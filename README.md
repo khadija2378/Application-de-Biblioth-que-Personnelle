@@ -15,8 +15,8 @@ Beaucoup de gens ont des livres chez eux mais ne savent pas :
 ---
 
 ## Technologies Utilisées
-- **Backend** : Laravel (PHP)  
-- **Frontend** : React.js  
+- **Backend** : Laravel (API REST) avec authentification Sanctum 
+- **Frontend** : React.js, ApiContext, TailwindCSS  
 - **Base de données** : MySQL  
 
 ---
@@ -78,6 +78,14 @@ Beaucoup de gens ont des livres chez eux mais ne savent pas :
   - Tableau de bord pour Admin
 
 - Design simple, agréable et responsive.
+---
+
+## Demo
+
+
+
+https://github.com/user-attachments/assets/deafa621-4b67-4be3-b5d2-6e3bd1ffa6e8
+
 
 
 ---
